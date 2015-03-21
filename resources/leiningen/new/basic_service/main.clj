@@ -4,11 +4,11 @@
   (:use ring.adapter.jetty)
   (:gen-class))
 
-(defn start-application []
+(defn- start-application []
   (logger/info "starting the application on port " 3000)
   (run-jetty app {:port 3000}))
 
-(defn init []
+(defn- init []
   (com.netflix.hystrix.strategy.concurrency.HystrixRequestContext/initializeContext))
 
 (defn -main [& args]

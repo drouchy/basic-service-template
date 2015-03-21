@@ -4,8 +4,8 @@
             [ring.util.http-response :refer :all]
             [schema.core :as s]))
 
-(def ok-response        {:health-check {:status "OK"}})
-(def not-found-response {:error {:code 404 :message "uri not found"}})
+(def ^:private ok-response        {:health-check {:status "OK"}})
+(def ^:private not-found-response {:error {:code 404 :message "uri not found"}})
 
 (s/defschema HealthCheck {:health-check {:status String}})
 (s/defschema ApiError    {:error {:code Integer :message String}})

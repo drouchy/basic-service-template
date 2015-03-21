@@ -23,6 +23,7 @@
                            :plugins [[lein-ring "0.9.2"]
                                      [lein-environ "1.0.0"]
                                      [lein-ancient "0.6.5"]
+                                     [codox "0.8.11"]
                                      [com.jakemccrary/lein-test-refresh "0.6.0"]]}
               :uberjar-common { :aot :all}
 

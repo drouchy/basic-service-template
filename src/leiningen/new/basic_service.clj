@@ -19,6 +19,7 @@
 (defmethod option-files :base [_ data]
   [["src/{{sanitized}}/handler.clj"  (render "handler.clj" data)]
    ["src/{{sanitized}}/main.clj"     (render "main.clj" data)]
+   ["src/logback.xml"                (render "logback.xml" data)]
    ["project.clj"                    (render "project.clj" data)]
    ["profiles.clj"                   (render "profiles.clj" data)]
    ["README.md"                      (render "README.md" data)]

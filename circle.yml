@@ -2,6 +2,8 @@ test:
   pre:
     - lein install
     - lein new basic-service tmp-service
+    - lein new basic-service tmp-service-with-db +database
 
   override:
     - cd tmp-service ; lein trampoline test
+    - cd tmp-service-with-db ; lein trampoline test

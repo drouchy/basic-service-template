@@ -8,11 +8,23 @@
 (defn pad [len]
   (apply str (repeat len " ")))
 
+(defn database? [opts]
+  (some #{:database} opts))
+
+(defn database-deps []
+  (s/join (concat "\n" (pad 17) "[ragtime/ragtime.sql.files \"0.3.8\"]\n"
+                       (pad 17) "[org.postgresql/postgresql \"9.3-1102-jdbc41\"]\n"
+                       (pad 17) "[org.clojure/java.jdbc \"0.3.5\"]\n"
+                       (pad 17) "[korma \"0.4.0\"]\n")))
+
 (defn template-data [name opts]
   {:name           name
    :name-camel     (str (s/upper-case (subs name 0 1)) (subs name 1))
    :sanitized      (name-to-path name)
-   :cl-test-readme "\n### Run the tests\n\n`lein test`\n"})
+   :cl-test-readme "\n### Run the tests\n\n`lein test`\n"
+   :database-deps  (if (database? opts) 
+                       (database-deps)
+                       "")})
 
 (defmulti option-files (fn [option data] option))
 
@@ -28,7 +40,9 @@
    ["test/utils/web.clj"               (render "test/web.clj" data)]])
 
 (defmethod option-files :database [_ data]
-  [])
+  [["src/{{sanitized}}/db.clj"  (render "db.clj" data)]
+   ["src/migrations/.gitkeep"   (render "keep" data)]
+   ["test/utils/db.clj"         (render "test/db.clj" data)]])
 
 (defn active-options [args]
   (for [arg args :when (re-matches #"\+[A-Za-z0-9-]+" arg)]

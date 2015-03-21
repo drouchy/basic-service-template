@@ -10,6 +10,7 @@
                  [ch.qos.logback/logback-classic "1.1.2"]
                  [http-kit "2.1.19"]
                  [cheshire "5.4.0"]
+                 {{{database-deps}}}
                  [com.netflix.hystrix/hystrix-clj "1.4.1"]]
 
   :min-lein-version "2.0.0"

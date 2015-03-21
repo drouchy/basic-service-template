@@ -1,0 +1,7 @@
+test:
+  pre:
+    - lein install
+    - lein new basic-service tmp-service
+
+  override:
+    - cd tmp-service ; lein trampoline test
